@@ -116,4 +116,15 @@ print(agg_result)
 ```
 <img width="764" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/75821de7-78b1-4cd9-b3ac-10f87d602c11">
 
- 
+
+# Diskretizimi
+bins = [20, 40, 60, 80, 100]
+labels = ['20-40', '40-60', '60-80', '80-100']
+df['Age_Binned'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
+ plt.figure(figsize=(10, 6))
+plt.hist(df['age'], bins=bins, edgecolor='black', alpha=0.7)
+plt.title('Age Distribution with Bins')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
+<img width="529" alt="Bildschirm­foto 2023-11-18 um 15 42 18" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/1183fefb-9d74-492b-82eb-bc37c1b05ad2">
