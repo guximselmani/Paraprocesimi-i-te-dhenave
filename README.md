@@ -104,7 +104,7 @@ df.isnull().sum()
 # Aggregation
 #Ne baze te kolonave SMK_stat_type_cd dhe gjinise jan shfaq edhe te dhenat mesatare prej kolonave tot_chole, HDL_chole, LDL_chole, triglyceride 
 ```
-agg_result = df.groupby(['SMK_stat_type_cd', 'sex']).agg({
+agg_result = cleaned_df.groupby(['SMK_stat_type_cd', 'sex']).agg({
     'tot_chole': 'mean',
     'HDL_chole': 'mean',
     'LDL_chole': 'mean',
