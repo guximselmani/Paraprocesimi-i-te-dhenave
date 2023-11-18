@@ -102,6 +102,18 @@ df.isnull().sum()
 
 
 # Aggregation
- <img width="689" alt="Bildschirm­foto 2023-11-18 um 14 48 40" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/18f76032-f9e9-4628-a855-b7d5d1b8c0cc">
+#Ne baze te kolonave SMK_stat_type_cd dhe gjinise jan shfaq edhe te dhenat mesatare prej kolonave tot_chole, HDL_chole, LDL_chole, triglyceride 
+```
+agg_result = df.groupby(['SMK_stat_type_cd', 'sex']).agg({
+    'tot_chole': 'mean',
+    'HDL_chole': 'mean',
+    'LDL_chole': 'mean',
+    'triglyceride': 'mean'
+}).reset_index()
+
+print("\nAggregated Result:")
+print(agg_result)
+```
+<img width="764" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/75821de7-78b1-4cd9-b3ac-10f87d602c11">
 
  
