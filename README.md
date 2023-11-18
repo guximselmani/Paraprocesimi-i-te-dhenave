@@ -56,7 +56,52 @@ df = pd.read_csv('./smoking_driking_dataset_Ver01.csv')
 
 Nuk ka vlera null
 
-#get unique values for unit's used column 
-df.SBP.unique()
+
+#Kualiteti i te dhenave
+ -ACCURACY
+ #Mosha
+  import great_expectations as gx
+  context = gx.get_context()
+  validator = context.sources.pandas_default.read_csv(
+    "./smoking_driking_dataset.csv"
+)
+
+<img width="706" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/6869d473-394a-448d-ae07-fabdc0f35e0d">
+
+#Gjinia
+
+<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/ee3772ad-49e0-4517-ab56-f002401367d9">
+
+#Drinks/Smokes Yes / No
+
+<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/5209b8e7-4e69-4cee-bdb8-91e0a571ec8c">
+
+#Drinks/Smokes State
+
+<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/173825e0-37ba-4aaf-870f-0229660ab981">
+
+ 
+
+ # DUPLICATION
+duplicates = df[df.duplicated(keep='first')]
+print("First occurrences of duplicates:")
+print(duplicates)
+ <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/9480e850-fc67-43d0-a4b8-d8d742aa97bb">
+
+   # Removing duplicates
+  cleaned_df = df.drop_duplicates()
+  print(cleaned_df)
+  <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/f72c7b85-87d7-41a3-a5da-7161fabc9fad">
 
 
+# Completeness
+#identifiko te dhenat null
+print('te dhenat null')
+df.isnull().sum()
+ <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/e1fcd03d-4e9a-4413-b285-89291ae9cae9">
+
+
+# Aggregation
+ <img width="689" alt="Bildschirm­foto 2023-11-18 um 14 48 40" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/18f76032-f9e9-4628-a855-b7d5d1b8c0cc">
+
+ 
