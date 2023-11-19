@@ -148,16 +148,17 @@ plt.show()
 
 #gjithashtu edhe Blod presure kolonen
 ```
-bins = [80, 90, 100, 110]
+bins = [60, 90, 130, 200]
 labels = ['Low', 'Normal', 'High']
-cleaned_df['BLDS_Category'] = pd.cut(cleaned_df['BLDS'], bins=bins, labels=labels, right=False)
+df['BLDS_Category'] = pd.cut(df['BLDS'], bins=bins, labels=labels, right=False)
 
 
 # Display the DataFrame after discretization
 print("DataFrame after Discretization:")
-print(cleaned_df)
+print(df)
 ```
-![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/13e6e5d3-3c81-4705-ac97-d0945b083d73)
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/5053728e-331d-46ea-ae4f-077df535b3a4)
+
 
 # Binarizimi i kolones se gjinise dhe DRK_YN
 ```
