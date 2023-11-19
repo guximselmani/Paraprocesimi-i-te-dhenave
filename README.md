@@ -43,66 +43,81 @@ import numpy as np
 Importimi i datasetit ështe bere me komanden:
 df = pd.read_csv('./smoking_driking_dataset_Ver01.csv')
 
-# shfaq te informatat per datasetin
-# print('informatat e te dhenave')
-# df.info()
+# shfaq te gjitha informatat per datasetin
 
-![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/a74fa5c7-4081-4d24-9c5e-6b3d0110b4ec)
+<img width="1009" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/2de87fe0-166a-4f8e-9b64-a7a58655c7f4">
+
+# Fshirja e kolona qe nuk kemi qellim ti perdorim 
+```
+# Drop columns that we don't need
+columns_to_drop = ['waistline', 'sight_left', 'sight_right', 'hear_left', 'hear_right', 'SGOT_AST', 'SGOT_ALT', 'gamma_GTP', 'serum_creatinine', 'urine_protein']
+df = df.drop(columns=columns_to_drop)
+```
 
 
-#identifiko te dhenat null
-# print('te dhenat null')
-# df.isnull().sum()
+# identifiko te dhenat null
+```
+print('te dhenat null')
+df.isnull().sum()
+```
+
+<img width="761" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/6cc8337c-0935-485f-9e78-66851a09b4fb">
 
 Nuk ka vlera null
 
 
 #Kualiteti i te dhenave
  -ACCURACY
+ ```
  #Mosha
   import great_expectations as gx
   context = gx.get_context()
   validator = context.sources.pandas_default.read_csv(
     "./smoking_driking_dataset.csv"
-)
+  )
+```
 
-<img width="706" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/6869d473-394a-448d-ae07-fabdc0f35e0d">
+<img width="1198" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/3152daee-30fd-4d52-a603-dfc85e7ddf18">
 
 #Gjinia
 
-<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/ee3772ad-49e0-4517-ab56-f002401367d9">
+<img width="1133" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/9c07531e-5377-4f1e-9bf1-bbdd8ff559b1">
 
 #Drinks/Smokes Yes / No
 
-<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/5209b8e7-4e69-4cee-bdb8-91e0a571ec8c">
+<img width="879" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/745947b3-4ecd-4531-84d3-ab8be13b209f">
 
 #Drinks/Smokes State
 
-<img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/173825e0-37ba-4aaf-870f-0229660ab981">
+<img width="1075" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/d7e0c0c4-3705-4807-b3c3-904676f7c81f">
 
- 
 
  # DUPLICATION
+ ```
 duplicates = df[df.duplicated(keep='first')]
 print("First occurrences of duplicates:")
 print(duplicates)
- <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/9480e850-fc67-43d0-a4b8-d8d742aa97bb">
+```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/9c576460-f9ad-44dc-b8fa-46dc9b691016)
 
-   # Removing duplicates
-  cleaned_df = df.drop_duplicates()
-  print(cleaned_df)
-  <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/f72c7b85-87d7-41a3-a5da-7161fabc9fad">
-
+#Removing duplicates
+```
+cleaned_df = df.drop_duplicates()
+print(cleaned_df)
+```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/9addb2dc-15b0-4082-9750-c30a35dcd44f)
 
 # Completeness
+```
 #identifiko te dhenat null
 print('te dhenat null')
 df.isnull().sum()
- <img width="689" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/e1fcd03d-4e9a-4413-b285-89291ae9cae9">
+```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/b2f46f91-6c0c-40f1-861d-5757c5b57be3)
 
 
 # Aggregation
-#Ne baze te kolonave SMK_stat_type_cd dhe gjinise jan shfaq edhe te dhenat mesatare prej kolonave tot_chole, HDL_chole, LDL_chole, triglyceride 
+#Ne baze te kolonave SMK_stat_type_cd dhe gjinise jane shfaqur edhe te dhenat mesatare prej kolonave tot_chole, HDL_chole, LDL_chole, triglyceride 
 ```
 agg_result = cleaned_df.groupby(['SMK_stat_type_cd', 'sex']).agg({
     'tot_chole': 'mean',
@@ -114,30 +129,39 @@ agg_result = cleaned_df.groupby(['SMK_stat_type_cd', 'sex']).agg({
 print("\nAggregated Result:")
 print(agg_result)
 ```
-<img width="764" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/75821de7-78b1-4cd9-b3ac-10f87d602c11">
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/740f5228-0569-4887-a054-c22a07b03434)
 
 
 # Diskretizimi
+```
 bins = [20, 40, 60, 80, 100]
 labels = ['20-40', '40-60', '60-80', '80-100']
 df['Age_Binned'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
- plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 6))
 plt.hist(df['age'], bins=bins, edgecolor='black', alpha=0.7)
 plt.title('Age Distribution with Bins')
 plt.xlabel('Age')
 plt.ylabel('Frequency')
 plt.show()
-<img width="529" alt="Bildschirm­foto 2023-11-18 um 15 42 18" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/1183fefb-9d74-492b-82eb-bc37c1b05ad2">
+```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/3770865a-950e-4639-80a1-b035797dfc1d)
+
+#gjithashtu edhe Blod presure kolonen
+```
+bins = [80, 90, 100, 110]
+labels = ['Low', 'Normal', 'High']
+cleaned_df['BLDS_Category'] = pd.cut(cleaned_df['BLDS'], bins=bins, labels=labels, right=False)
 
 
-# Fshirja e kolona qe nuk kemi qellim ti perdorim 
+# Display the DataFrame after discretization
+print("DataFrame after Discretization:")
+print(cleaned_df)
 ```
-# Drop columns that we don't need
-columns_to_drop = ['waistline', 'sight_left', 'sight_right', 'hear_left', 'hear_right', 'SGOT_AST', 'SGOT_ALT', 'gamma_GTP', 'serum_creatinine', 'urine_protein']
-df = df.drop(columns=columns_to_drop)
-```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/13e6e5d3-3c81-4705-ac97-d0945b083d73)
 
 # Binarizimi i kolones se gjinise dhe DRK_YN
 ```
 df_onehot = pd.get_dummies(df, columns=['sex', 'DRK_YN'], drop_first=True)
 ```
+![image](https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/d379fb39-a10e-41b0-8a27-2a78b1fb4a8a)
+
