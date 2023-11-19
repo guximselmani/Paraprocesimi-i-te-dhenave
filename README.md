@@ -136,3 +136,8 @@ plt.show()
 columns_to_drop = ['waistline', 'sight_left', 'sight_right', 'hear_left', 'hear_right', 'SGOT_AST', 'SGOT_ALT', 'gamma_GTP', 'serum_creatinine', 'urine_protein']
 df = df.drop(columns=columns_to_drop)
 ```
+
+# Binarizimi i kolones se gjinise dhe DRK_YN
+```
+df_onehot = pd.get_dummies(df, columns=['sex', 'DRK_YN'], drop_first=True)
+```
