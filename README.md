@@ -128,3 +128,16 @@ plt.xlabel('Age')
 plt.ylabel('Frequency')
 plt.show()
 <img width="529" alt="Bildschirm­foto 2023-11-18 um 15 42 18" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/1183fefb-9d74-492b-82eb-bc37c1b05ad2">
+
+
+# Fshirja e kolona qe nuk kemi qellim ti perdorim 
+```
+# Drop columns that we don't need
+columns_to_drop = ['waistline', 'sight_left', 'sight_right', 'hear_left', 'hear_right', 'SGOT_AST', 'SGOT_ALT', 'gamma_GTP', 'serum_creatinine', 'urine_protein']
+df = df.drop(columns=columns_to_drop)
+```
+
+# Binarizimi i kolones se gjinise dhe DRK_YN
+```
+df_onehot = pd.get_dummies(df, columns=['sex', 'DRK_YN'], drop_first=True)
+```
