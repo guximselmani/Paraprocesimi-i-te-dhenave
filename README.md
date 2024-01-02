@@ -183,6 +183,7 @@ from scipy.stats import zscore
 # Select numeric columns
 numeric_columns = df_onehot.select_dtypes(include=['float64', 'int64']).columns
 
+#Mënyra e parë
 # Calculate Z-scores for each numeric column
 z_scores = np.abs(zscore(df_onehot[numeric_columns]))
 
@@ -207,6 +208,7 @@ sns.boxplot(data=df_onehot[numeric_columns])
 
 
 ```
+#Mënyra e dytë
 # Calculate IQR for each numeric column
 Q1 = df_onehot[numeric_columns].quantile(0.25)
 Q3 = df_onehot[numeric_columns].quantile(0.75)
@@ -271,6 +273,11 @@ plt.show()
 
 <img width="879" alt="Bildschirmfoto 2024-01-02 um 16 45 57" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/65bbbcb1-da22-4fdf-894d-59d668010fb7">
 
+```
+
+ 
+```
+# Eksplorimi i të dhënave
 ``` 
 # Before removing outliers
 plt.figure(figsize=(12, 6))
@@ -289,15 +296,17 @@ plt.show()
 <img width="879" alt="Bildschirmfoto 2024-01-02 um 16 46 51" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/7a32a8e7-f155-493d-a1cd-6623dd9fa5e1">
 
 ```
-#Matrix correlation
+```
 #Statistike përmbledhëse
+```
+#Matrix correlation
  
 # Before removing outliers
 correlation_before = df_onehot[numeric_columns].corr()
 
 # After removing outliers
 correlation_after = df_cleaned[numeric_columns].corr()
-
+ 
 # Compare the two correlation matrices
 print("Correlation matrix before removing outliers:")
 print(correlation_before)
@@ -315,8 +324,11 @@ print(df_cleaned.columns)
 
 ```
 from sklearn.linear_model import LinearRegression
-#Eksplorimi i të dhënave, analiza multivariante
- 
+
+```
+Analiza multivariante
+```
+
 model = LinearRegression()
 X = df_cleaned[['BLDS', 'tot_chole','triglyceride',]]
 y = df_cleaned['DRK_YN_Y']
