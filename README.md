@@ -262,6 +262,9 @@ sns.histplot(data=df_onehot[numeric_columns], kde=True)
 plt.title("Distribution before removing outliers")
 plt.show()
 
+```
+#Mënjanimi i zbulimeve jo të sakta
+```
 # After removing outliers
 plt.figure(figsize=(12, 6))
 sns.histplot(data=df_cleaned[numeric_columns], kde=True)
@@ -326,7 +329,7 @@ print(df_cleaned.columns)
 from sklearn.linear_model import LinearRegression
 
 ```
-Analiza multivariante
+#Analiza multivariante
 ```
 
 model = LinearRegression()
