@@ -1,4 +1,6 @@
-<img width="586" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/141461af-1c2a-406d-983f-30be2c385a50"># Paraprocesimi-i-te-dhenave
+
+
+# Paraprocesimi-i-te-dhenave
 Smoking and Drinking Dataset with body signal
 
  
@@ -579,8 +581,161 @@ plt.show()
 <img width="573" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/009cbd0c-0e59-4c96-bbbf-4cfada912005">
 
 
+```
+ 
+# Log scale the 'BLDS' and 'hemoglobin' columns
+df_copy['BLDS'] = np.log10(df_cleaned['BLDS'])
+df_copy['hemoglobin'] = np.log10(df_cleaned['hemoglobin'])
+
+# Create a lmplot (scatter plot with a linear fit) for BLDS and sex_Male
+sns.lmplot("BLDS", "hemoglobin", data=df_copy, height=8, aspect=1)
+plt.title('BLDS (Log scaled) Vs hemoglobin (Log scaled)')
+
+# Show the plot
+plt.show()
+```
+
+<img width="468" alt="Bildschirmfoto 2024-01-07 um 20 55 04" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/1e11fc66-54c0-40fd-98ea-84ac7da1e51b">
+
+#Correlation 
+```
+# Select three columns 
+selected_columns = ['BLDS', 'triglyceride', 'hemoglobin']
+
+# Create a subset DataFrame with the selected columns
+df_subset = df_copy[selected_columns]
+
+# Set the size of the figure
+plt.figure(figsize=(10, 8))
+
+# Create a heatmap of the correlation matrix for the selected columns
+heatmap = sns.heatmap(df_subset.corr(), annot=True, cmap="YlGnBu")
+
+# Set the title of the heatmap
+plt.title('Correlation Heatmap for Selected Columns')
+
+# Show the plot
+plt.show()
+```
+
+<img width="457" alt="Bildschirmfoto 2024-01-07 um 20 56 33" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/d4c69bff-38a9-42ec-ad86-4448e041562f">
+
+#Triglicerided kanë më shumë ndikim në hemoglobinë sesa BLDS
+
+```
+sns.set_style('darkgrid')
+
+# Create a figure and axis
+fig, ax = plt.subplots()
+fig.set_size_inches(12, 8)
+
+# Create a scatter plot with regression line
+sns.regplot(x='BLDS', y='tot_chole', data=df, scatter_kws={'s': 20, 'alpha': 0.5})
+
+# Set the title of the plot
+title = ax.set_title('BLDS vs Total Cholesterol')
+
+# Show the plot
+plt.show()
+```
+<img width="606" alt="Bildschirmfoto 2024-01-07 um 20 57 32" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/95c86898-3c85-41fa-9943-38c1004bf83e">
+
+```
+sns.set_style('darkgrid')
+
+# Create a joint plot
+sns.jointplot(x='BLDS', y='tot_chole', data=df, kind='reg')
+
+# Show the plot
+plt.show()
+
+```
+<img width="387" alt="Bildschirmfoto 2024-01-07 um 20 58 23" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/ef1c536a-a8a9-4cf2-a411-a287caa7fb37">
+
+```
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+ 
+fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111, projection='3d')
+
+# Extract columns for the 3D scatter plot
+x = df_copy['height']
+y = df_copy['weight']
+z = df_copy['SBP']
+
+# Create a 3D scatter plot
+ax.scatter(x, y, z, c='blue', marker='o', label='Data Points')
+
+# Set labels for each axis
+ax.set_xlabel('Height')
+ax.set_ylabel('Weight')
+ax.set_zlabel('SBP')
+
+# Set the title of the plot
+ax.set_title('3D Scatter Plot: Height, Weight, and SBP')
+
+# Show the legend
+ax.legend()
+
+# Show the 3D scatter plot
+plt.show()
+
+```
+<img width="399" alt="Bildschirmfoto 2024-01-07 um 20 59 21" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/f6836eda-be46-4474-808b-f4ba2dcb727b">
+
+```
+ 
+fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111, projection='3d')
+
+# Extract columns for the 3D scatter plot
+x = df_copy['BLDS']
+y = df_copy['weight']
+z = df_copy['SBP']
+categories = df_copy['DRK_YN_Y']  
+
+# Create a mapping of category to color based on the order of unique values
+category_colors = {1: 'red', 0: 'blue'}
+
+# Create a 3D scatter plot with color mapping
+scatter = ax.scatter(x, y, z, c=categories.map(category_colors), marker='o', label='Data Points')
+
+# Set labels for each axis
+ax.set_xlabel('BLDS')
+ax.set_ylabel('Weight')
+ax.set_zlabel('SBP')
+
+# Set the title of the plot
+ax.set_title('3D Scatter Plot: BLDS, Weight, and SBP')
+
+# Create custom legend handles
+legend_handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10, label=category) for category, color in category_colors.items()]
+
+# Create the legend
+ax.legend(handles=legend_handles, title='DRK_YN_Y')
+
+# Show the 3D scatter plot
+plt.show()
+
+```
+<img width="399" alt="Bildschirmfoto 2024-01-07 um 21 00 05" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/991480a7-f8ec-4682-a8a1-44538773efcd">
 
 
+#Interactive 3D scatter plot
+```
+import plotly.express as px
 
+ 
+fig = px.scatter_3d(df_copy, x='BLDS', y='weight', z='SBP', color='DRK_YN_Y',
+                    color_discrete_map={1: 'red', 0: 'blue'},
+                    labels={'BLDS': 'BLDS', 'weight': 'Weight', 'SBP': 'SBP', 'DRK_YN_Y': 'DRK_YN_Y'},
+                    title='3D Scatter Plot: BLDS, Weight, and SBP with Interactivity',
+                    opacity=0.7, size_max=10)
 
+# Show the plot
+fig.show()
 
+```
+<img width="1114" alt="Bildschirmfoto 2024-01-07 um 21 01 27" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/bfbcc25e-9f82-4467-8e81-0838e609601c">
