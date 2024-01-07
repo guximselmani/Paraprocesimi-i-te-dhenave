@@ -1,4 +1,4 @@
-# Paraprocesimi-i-te-dhenave
+<img width="586" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/141461af-1c2a-406d-983f-30be2c385a50"># Paraprocesimi-i-te-dhenave
 Smoking and Drinking Dataset with body signal
 
  
@@ -450,4 +450,137 @@ sns.pairplot(body_Smoking_1h, hue = "SMK_stat_type_cd", size = 3, palette = 'bri
 
  ```
 <img width="557" alt="Bildschirmfoto 2024-01-02 um 16 55 30" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44524736/eebdf93e-2122-472a-87b9-624d447cf405">
+
+
+#Distribution of weight
+
+```
+plt.figure(figsize=(8, 6))
+plt.hist(df_cleaned['weight'], bins=30, color='skyblue', edgecolor='black')
+plt.xlabel("Weight", size=15)
+plt.ylabel("Count", size=15)
+plt.title("Distribution of Weight", size=20)
+plt.show()
+```
+
+<img width="523" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/399a90c1-531d-40fd-a784-9c340471114e">
+
+#Weight Boxplot
+
+```
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title('Weight Boxplot', size=20)
+ax1.boxplot(df['weight'])
+plt.show()
+```
+<img width="602" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/86433cde-4453-4b1f-9d1c-8b4d1524c622">
+
+#Log BLDS Boxplot
+
+```
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title('Log BLDS Boxplot', size=20)
+ax1.boxplot(np.log(df['BLDS']), notch=True, vert=False, patch_artist=True)
+plt.show()
+```
+<img width="586" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/6d2744a7-0889-460a-9e8b-bdad0d6cf536">
+
+#Distribution of blood sugar
+
+```
+ 
+plt.figure(figsize=(7, 5))
+plt.hist(df_cleaned['BLDS'], alpha=0.5, histtype='bar', color='red', edgecolor='black')
+plt.xlabel("BLDS (Blood Sugar)", size=15)
+plt.ylabel("Count", size=15)
+plt.title("Distribution of Blood Sugar", size=20)
+
+# Calculate  statistics
+Bm = round(df['BLDS'].mean(), 2)
+Bsd = round(df['BLDS'].std(), 2)
+Bmo = round(df['BLDS'].median(), 2)
+ 
+
+txt = f"Summary:\n\nBlood Sugar mean: {Bm}\nBlood Sugar std: {Bsd}\nBlood Sugar median: {Bmo}"
+plt.text(150, 1200, txt, size=12, style='italic', bbox=dict(facecolor='red', alpha=0.5, edgecolor='black', boxstyle='larrow,pad=0.3'))
+
+plt.show()
+```
+<img width="696" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/d6ac5480-da16-463a-aed8-8d45a133b4c6">
+
+
+#Distribution of Triglyceride
+```
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(7, 5))
+plt.hist(df_cleaned['triglyceride'], alpha=0.8, histtype='bar', color='orange', edgecolor='black')
+plt.xlabel("Triglyceride", size=15)
+plt.ylabel("Count", size=15)
+plt.title("Distribution of Triglyceride", size=20)
+
+# Calculate summary statistics
+Tm = round(df_cleaned['triglyceride'].mean(), 2)
+Tsd = round(df_cleaned['triglyceride'].std(), 2)
+Tmo = round(df_cleaned['triglyceride'].median(), 2)
+
+# Create text box with summary information
+txt = f"Summary:\n\nTriglyceride mean: {Tm}\nTriglyceride std: {Tsd}\nTriglyceride median: {Tmo}"
+plt.text(50, 500, txt, size=12, style='italic', bbox=dict(facecolor='orange', alpha=0.8, edgecolor='black', boxstyle='circle,pad=1.5'))
+
+plt.show()
+```
+<img width="470" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/736a2d62-a087-4923-b7e0-356fb1172886">
+
+#BLDS Category Distribution 
+
+```
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 10))
+
+# Create a bar plot of categories
+plt.bar(df_cleaned['BLDS_Category'].value_counts().index.tolist(), df_cleaned['BLDS_Category'].value_counts(), color="cyan")
+
+# Rotate x-axis labels for better visibility
+plt.xticks(rotation=90)
+
+# Annotate the bars with the percentage of each category
+for i in range(len(df_cleaned['BLDS_Category'].value_counts())):
+    txt = f"{round(df_cleaned['BLDS_Category'].value_counts()[i] / df.shape[0] * 100, 2)}%"
+    plt.text(i, df_cleaned['BLDS_Category'].value_counts()[i] + 150, txt, size=12, style='italic', color="white",
+             bbox=dict(facecolor='darkblue', alpha=0.8, edgecolor='white', boxstyle='round4,pad=0.5'))
+
+plt.xlabel("BLDS Category", size=15, color="black")
+plt.ylabel("Count", size=15, color="black")
+plt.title("BLDS Category Distribution", size=20, color="black")
+plt.show()
+```
+<img width="745" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/655d59f5-e5bd-42c0-9959-68bad32dc75e">
+
+
+#BLDS VS Triglyceride
+```
+df_copy = df_cleaned.copy()
+ 
+
+# Log scale the 'BLDS' and 'triglyceride' columns
+df_copy['BLDS'] = np.log10(df_cleaned['BLDS'])
+df_copy['triglyceride'] = np.log10(df_cleaned['triglyceride'])
+
+# Create a lmplot (scatter plot with a linear fit) for BLDS and triglyceride
+sns.lmplot("BLDS", "triglyceride", data=df_copy, height=8, aspect=1)
+plt.title('BLDS (Log scaled) Vs triglyceride (Log scaled)')
+
+# Show the plot
+plt.show()
+```
+
+<img width="573" alt="image" src="https://github.com/guximselmani/Paraprocesimi-i-te-dhenave/assets/44323443/009cbd0c-0e59-4c96-bbbf-4cfada912005">
+
+
+
+
+
+
 
